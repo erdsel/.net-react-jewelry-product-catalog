@@ -1,0 +1,28 @@
+/* Custom Swiper Styles */
+.product-swiper {
+  padding: 2rem 3rem;
+}
+
+.product-swiper .swiper-pagination {
+  bottom: 0;
+}
+
+.product-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #d1d5db;
+  opacity: 1;
+}
+
+.product-swiper .swiper-pagination-bullet-active {
+  background: #6b7280;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+.carousel-container {
+  position: relative;
+}
