@@ -74,9 +74,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/30 via-white to-amber-50/30 py-12">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">Gold Jewelry Collection</h1>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-avenir font-bold bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 bg-clip-text text-transparent mb-3">
+            Exquisite Gold Jewelry
+          </h1>
+          <p className="text-gray-600 font-montserrat text-lg">Timeless Elegance • Crafted with Precision</p>
+        </div>
         <FilterPanel onFilterChange={handleFilterChange} />
         <ProductCarousel products={products} />
       </div>

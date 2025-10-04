@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gold-jewelry-api
+    runtime: dotnet
+    buildCommand: cd backend && dotnet restore && dotnet publish -c Release -o out
+    startCommand: cd backend/out && dotnet ProductAPI.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: FRONTEND_URL
+        sync: false
