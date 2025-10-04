@@ -12,6 +12,6 @@ services:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: FRONTEND_URL
-        value: https://YOUR_FRONTEND_URL_HERE.vercel.app
+        value: https://net-react-jewelry-product-catalog.vercel.app
       - key: PORT
         value: 8080
