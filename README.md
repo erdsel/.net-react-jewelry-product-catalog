@@ -1,140 +1,114 @@
-# Product Listing Full-Stack Application
+# gold jewelry product catalog
 
-A full-stack product listing application with .NET 8 backend and React TypeScript frontend.
+a full-stack web application showcasing gold jewelry products with real-time pricing based on current gold market rates. built with .net 8 backend and react + typescript frontend, deployed on render and vercel.
 
-## Features
+## live demo
 
-- **Backend (.NET 8 Web API)**
-  - RESTful API serving product data
-  - Real-time gold price integration (GoldAPI.io)
-  - Dynamic price calculation: `(popularityScore + 1) × weight × goldPrice`
-  - Filtering by price range and popularity score
-  - CORS enabled for frontend integration
+- **frontend**: https://net-react-jewelry-product-catalog.vercel.app
+- **backend api**: https://gold-jewelry-api.onrender.com/api/products
 
-- **Frontend (React + TypeScript)**
-  - Responsive product carousel with Swiper.js
-  - Color picker for product variants (Yellow/Rose/White Gold)
-  - Star rating system (popularity score converted to 5-star scale)
-  - Tailwind CSS for styling
-  - Mobile-friendly swipe support
+## features
 
-## Prerequisites
+### core functionality
+- real-time gold price integration with multiple api fallbacks
+- dynamic price calculation: `(popularity_score + 1) × weight × gold_price_per_gram`
+- interactive product carousel with swipe support (mobile & desktop)
+- color variant selector (yellow gold, rose gold, white gold)
+- star rating system (popularity score converted to 5-star scale)
+- price and popularity filtering
+- responsive design for all screen sizes
 
-- .NET 8 SDK
-- Node.js (v20+)
-- npm or yarn
+### technical highlights
+- restful api architecture
+- service-based backend design pattern
+- typescript for type-safe frontend development
+- optimized docker deployment
+- cors configuration for cross-origin requests
+- environment-based configuration
 
-## Setup Instructions
+## technology stack
 
-### Backend Setup
+### backend
+- **framework**: .net 8 / asp.net core web api
+- **language**: c# 12
+- **architecture**: service layer pattern with dependency injection
+- **apis**: goldapi.io, metalpriceapi.com, goldprice.org (fallback chain)
+- **deployment**: render (docker container)
 
-1. Navigate to backend directory:
-   ```bash
-   cd backend
-   ```
+### frontend
+- **framework**: react 18
+- **language**: typescript
+- **build tool**: vite
+- **styling**: tailwind css
+- **ui library**: swiper.js (carousel)
+- **http client**: axios
+- **deployment**: vercel
 
-2. Restore dependencies:
-   ```bash
-   dotnet restore
-   ```
-
-3. Run the API:
-   ```bash
-   dotnet run
-   ```
-
-   The API will be available at `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-   The app will be available at `http://localhost:5173`
-
-## API Endpoints
-
-### Get All Products
-```
-GET /api/products
-```
-
-### Get Filtered Products
-```
-GET /api/products?minPrice=100&maxPrice=500&minPopularity=0.5&maxPopularity=1.0
-```
-
-**Query Parameters:**
-- `minPrice` (optional): Minimum price filter
-- `maxPrice` (optional): Maximum price filter
-- `minPopularity` (optional): Minimum popularity score (0-1)
-- `maxPopularity` (optional): Maximum popularity score (0-1)
-
-## Project Structure
+## project structure
 
 ```
 full-stack-project/
 ├── backend/
 │   ├── Controllers/
-│   │   └── ProductsController.cs
+│   │   └── ProductsController.cs      # api endpoints
 │   ├── Models/
-│   │   ├── Product.cs
-│   │   └── GoldPriceResponse.cs
+│   │   ├── Product.cs                 # product model
+│   │   └── GoldPriceResponse.cs       # api response models
 │   ├── Services/
-│   │   ├── IGoldPriceService.cs
-│   │   ├── GoldPriceService.cs
-│   │   ├── IProductService.cs
-│   │   └── ProductService.cs
+│   │   ├── IGoldPriceService.cs       # gold price service interface
+│   │   ├── GoldPriceService.cs        # gold price api integration
+│   │   ├── IProductService.cs         # product service interface
+│   │   └── ProductService.cs          # product business logic
 │   ├── Data/
-│   │   └── products.json
-│   └── Program.cs
+│   │   └── products.json              # product seed data
+│   ├── Program.cs                     # app configuration & startup
+│   ├── Dockerfile                     # docker configuration
+│   └── ProductAPI.csproj              # project dependencies
 │
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── ProductCard.tsx
-    │   │   └── ProductCarousel.tsx
-    │   ├── services/
-    │   │   └── api.ts
-    │   ├── types/
-    │   │   └── Product.ts
-    │   ├── App.tsx
-    │   └── index.css
-    └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ProductCard.tsx        # individual product card
+│   │   │   ├── ProductCarousel.tsx    # swiper carousel wrapper
+│   │   │   └── FilterPanel.tsx        # price/popularity filters
+│   │   ├── services/
+│   │   │   └── api.ts                 # axios api client
+│   │   ├── types/
+│   │   │   └── Product.ts             # typescript interfaces
+│   │   ├── App.tsx                    # main app component
+│   │   ├── main.tsx                   # react entry point
+│   │   └── App.css                    # global styles
+│   ├── public/                        # static assets
+│   ├── index.html                     # html template
+│   ├── tailwind.config.js             # tailwind configuration
+│   ├── vite.config.ts                 # vite configuration
+│   ├── vercel.json                    # vercel deployment config
+│   └── package.json                   # dependencies
+│
+├── render.yaml                        # render deployment blueprint
+└── products.json                      # original product data
 ```
 
-## Technologies Used
+## local development setup
 
-### Backend
-- .NET 8
-- ASP.NET Core Web API
-- GoldAPI.io for real-time gold prices
+### prerequisites
+- .net 8 sdk
+- node.js 20+
+- npm or yarn
 
-### Frontend
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- Swiper.js
-- Axios
+### backend setup
 
-## Configuration
+1. navigate to backend directory:
+```bash
+cd backend
+```
 
-### Gold API Key
-The backend uses GoldAPI.io for real-time gold prices. The API key is configured in `backend/appsettings.json`:
+2. restore dependencies:
+```bash
+dotnet restore
+```
 
+3. (optional) configure gold api key in `appsettings.json`:
 ```json
 {
   "GoldAPI": {
@@ -143,16 +117,180 @@ The backend uses GoldAPI.io for real-time gold prices. The API key is configured
 }
 ```
 
-## Deployment
+4. run the api:
+```bash
+dotnet run
+```
 
-### Backend
-- Recommended: Railway, Render, or Azure App Service
-- Ensure environment variables are set for production
+the api will be available at `http://localhost:5142`
 
-### Frontend
-- Recommended: Vercel, Netlify, or GitHub Pages
-- Update API base URL in `frontend/src/services/api.ts` for production
+### frontend setup
 
-## License
+1. navigate to frontend directory:
+```bash
+cd frontend
+```
 
-MIT
+2. install dependencies:
+```bash
+npm install
+```
+
+3. create `.env.development` file:
+```
+VITE_API_URL=http://localhost:5142/api
+```
+
+4. run the development server:
+```bash
+npm run dev
+```
+
+the app will be available at `http://localhost:5173`
+
+## api documentation
+
+### endpoints
+
+#### get all products
+```
+GET /api/products
+```
+
+**response example:**
+```json
+[
+  {
+    "name": "engagement ring 1",
+    "popularityScore": 0.85,
+    "weight": 2.1,
+    "images": {
+      "yellow": "https://cdn.shopify.com/...",
+      "rose": "https://cdn.shopify.com/...",
+      "white": "https://cdn.shopify.com/..."
+    },
+    "price": 485.48,
+    "rating": 4.2
+  }
+]
+```
+
+#### get filtered products
+```
+GET /api/products?minPrice=100&maxPrice=500&minPopularity=0.5&maxPopularity=1.0
+```
+
+**query parameters:**
+- `minPrice` (number, optional): minimum price in usd
+- `maxPrice` (number, optional): maximum price in usd
+- `minPopularity` (number, optional): minimum popularity score (0-1)
+- `maxPopularity` (number, optional): maximum popularity score (0-1)
+
+### price calculation logic
+
+```
+price = (popularity_score + 1) × weight_in_grams × current_gold_price_per_gram
+```
+
+- **popularity_score**: 0-1 scale representing product popularity
+- **weight**: product weight in grams
+- **gold_price**: fetched from real-time apis with fallback chain
+
+### gold price service
+
+the backend attempts multiple apis in order:
+1. goldapi.io (requires api key)
+2. metalpriceapi.com
+3. goldprice.org
+4. fallback to $75/gram if all apis fail
+
+## deployment
+
+### backend (render)
+
+deployed using docker with the following configuration:
+
+**environment variables:**
+- `ASPNETCORE_ENVIRONMENT=Production`
+- `FRONTEND_URL=https://net-react-jewelry-product-catalog.vercel.app`
+- `PORT=8080`
+
+**deployment steps:**
+1. connect github repository to render
+2. select "docker" as runtime
+3. set dockerfile path: `./backend/Dockerfile`
+4. configure environment variables
+5. deploy
+
+### frontend (vercel)
+
+deployed with automatic build detection:
+
+**environment variables:**
+- `VITE_API_URL=https://gold-jewelry-api.onrender.com/api`
+
+**deployment steps:**
+1. connect github repository to vercel
+2. set root directory: `frontend`
+3. framework preset: vite
+4. configure environment variables
+5. deploy
+
+## key implementation details
+
+### backend architecture
+
+- **dependency injection**: services registered in `Program.cs`
+- **httpclient factory**: proper http client lifecycle management
+- **cors policy**: configurable allowed origins via environment variables
+- **error handling**: graceful fallback for external api failures
+- **logging**: structured logging with different log levels
+
+### frontend features
+
+- **swiper integration**: touch-enabled carousel with navigation
+- **color state management**: per-product color selection
+- **responsive images**: shopify cdn-hosted product images
+- **filter state**: react hooks for filter management
+- **error boundaries**: user-friendly error messages
+- **loading states**: skeleton screens during data fetch
+
+### responsive design
+
+- mobile-first approach with tailwind css
+- breakpoints: sm (640px), md (768px), lg (1024px)
+- swipeable carousel on touch devices
+- adaptive grid layouts
+
+## future enhancements
+
+- user authentication and favorites
+- shopping cart functionality
+- admin panel for product management
+- database integration (currently json-based)
+- product search and advanced filtering
+- pagination for large product catalogs
+- performance optimization with caching
+- internationalization (i18n)
+
+## troubleshooting
+
+### cors errors
+ensure `FRONTEND_URL` environment variable is set correctly in render backend deployment
+
+### api not responding
+check render logs for backend errors. free tier may sleep after inactivity.
+
+### gold price showing fallback
+verify internet connectivity and api rate limits. fallback price is $75/gram.
+
+### frontend not loading products
+verify `VITE_API_URL` environment variable is set in vercel deployment settings
+
+## license
+
+mit
+
+## author
+
+built as a full-stack developer assignment showcasing modern web development practices.
