@@ -7,6 +7,11 @@ a full-stack web application showcasing gold jewelry products with real-time pri
 - **frontend**: https://net-react-jewelry-product-catalog.vercel.app
 - **backend api**: https://gold-jewelry-api.onrender.com/api/products
 
+## screenshots from project
+![ss\homepage.jpg]
+![ss\homepage2.jpg]
+![ss\changecolors.jpg]
+![ss\filter.jpg]
 ## features
 
 ### core functionality
@@ -89,7 +94,7 @@ full-stack-project/
 └── products.json                      # original product data
 ```
 
-## local development setup
+## local development setupa
 
 ### prerequisites
 - .net 8 sdk
