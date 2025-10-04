@@ -13,7 +13,7 @@ interface Product {
   rating: number;
 }
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5142/api';
 
 export const productApi = {
   getProducts: async (filters?: {

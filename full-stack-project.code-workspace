@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Downloads/Fonts"
+		}
+	],
+	"settings": {
+		"dotnet.defaultSolution": "c:\\Users\\Asus\\Desktop\\full-stack-project\\backend\\backend.sln"
+	}
+}
