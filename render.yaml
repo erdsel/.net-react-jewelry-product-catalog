@@ -1,9 +1,9 @@
 services:
   - type: web
     name: gold-jewelry-api
-    runtime: dotnet
-    buildCommand: cd backend && dotnet restore && dotnet publish -c Release -o out
-    startCommand: cd backend/out && dotnet ProductAPI.dll
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
