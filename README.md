@@ -8,10 +8,11 @@ a full-stack web application showcasing gold jewelry products with real-time pri
 - **backend api**: https://gold-jewelry-api.onrender.com/api/products
 
 ## screenshots from project
-![ss\homepage.jpg]
-![ss\homepage2.jpg]
-![ss\changecolors.jpg]
-![ss\filter.jpg]
+![ana ekran](ss/homepage.jpg)
+![ana ekran2](ss/homepage2.jpg)
+![Renk değiştirme](ss/changecolors.jpg)
+![Filtreleme](ss/filter.jpg)
+
 ## features
 
 ### core functionality
