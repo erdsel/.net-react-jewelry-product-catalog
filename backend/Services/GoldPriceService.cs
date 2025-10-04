@@ -21,7 +21,7 @@ public class GoldPriceService : IGoldPriceService
         // Try multiple gold price sources
         decimal? price = null;
 
-        // Try GoldAPI.io first
+        // Try GoldAPI.io first (if configured)
         price = await TryGoldApiIo();
         if (price.HasValue) return price.Value;
 
@@ -29,8 +29,12 @@ public class GoldPriceService : IGoldPriceService
         price = await TryMetalsApi();
         if (price.HasValue) return price.Value;
 
+        // Try free public API
+        price = await TryGoldPriceOrg();
+        if (price.HasValue) return price.Value;
+
         // Fallback to reasonable default price
-        _logger.LogWarning("All gold price APIs failed, using fallback price");
+        _logger.LogInformation("All gold price APIs unavailable, using fallback price");
         return 75m; // Updated fallback price (approx current gold price per gram)
     }
 
@@ -109,6 +113,46 @@ public class GoldPriceService : IGoldPriceService
         catch (Exception ex)
         {
             _logger.LogDebug(ex, "MetalsAPI failed");
+            return null;
+        }
+    }
+
+    private async Task<decimal?> TryGoldPriceOrg()
+    {
+        try
+        {
+            // goldprice.org free API
+            _httpClient.DefaultRequestHeaders.Clear();
+            var response = await _httpClient.GetAsync("https://data-asg.goldprice.org/dbXRates/USD");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogDebug($"GoldPrice.org returned {response.StatusCode}");
+                return null;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
+
+            if (json.RootElement.TryGetProperty("items", out var items) &&
+                items.GetArrayLength() > 0)
+            {
+                var firstItem = items[0];
+                if (firstItem.TryGetProperty("xauPrice", out var xauPrice))
+                {
+                    var pricePerOunce = xauPrice.GetDecimal();
+                    var pricePerGram = pricePerOunce / 31.1035m;
+
+                    _logger.LogInformation($"Gold price from GoldPrice.org: ${pricePerGram:F2}/gram");
+                    return pricePerGram;
+                }
+            }
+
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "GoldPrice.org failed");
             return null;
         }
     }
