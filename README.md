@@ -204,39 +204,6 @@ the backend attempts multiple apis in order:
 3. goldprice.org
 4. fallback to $75/gram if all apis fail
 
-## deployment
-
-### backend (render)
-
-deployed using docker with the following configuration:
-
-**environment variables:**
-- `ASPNETCORE_ENVIRONMENT=Production`
-- `FRONTEND_URL=https://net-react-jewelry-product-catalog.vercel.app`
-- `PORT=8080`
-
-**deployment steps:**
-1. connect github repository to render
-2. select "docker" as runtime
-3. set dockerfile path: `./backend/Dockerfile`
-4. configure environment variables
-5. deploy
-
-### frontend (vercel)
-
-deployed with automatic build detection:
-
-**environment variables:**
-- `VITE_API_URL=https://gold-jewelry-api.onrender.com/api`
-
-**deployment steps:**
-1. connect github repository to vercel
-2. set root directory: `frontend`
-3. framework preset: vite
-4. configure environment variables
-5. deploy
-
-## key implementation details
 
 ### backend architecture
 
@@ -255,42 +222,3 @@ deployed with automatic build detection:
 - **error boundaries**: user-friendly error messages
 - **loading states**: skeleton screens during data fetch
 
-### responsive design
-
-- mobile-first approach with tailwind css
-- breakpoints: sm (640px), md (768px), lg (1024px)
-- swipeable carousel on touch devices
-- adaptive grid layouts
-
-## future enhancements
-
-- user authentication and favorites
-- shopping cart functionality
-- admin panel for product management
-- database integration (currently json-based)
-- product search and advanced filtering
-- pagination for large product catalogs
-- performance optimization with caching
-- internationalization (i18n)
-
-## troubleshooting
-
-### cors errors
-ensure `FRONTEND_URL` environment variable is set correctly in render backend deployment
-
-### api not responding
-check render logs for backend errors. free tier may sleep after inactivity.
-
-### gold price showing fallback
-verify internet connectivity and api rate limits. fallback price is $75/gram.
-
-### frontend not loading products
-verify `VITE_API_URL` environment variable is set in vercel deployment settings
-
-## license
-
-mit
-
-## author
-
-built as a full-stack developer assignment showcasing modern web development practices.
