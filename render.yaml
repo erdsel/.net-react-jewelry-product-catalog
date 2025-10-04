@@ -4,8 +4,14 @@ services:
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
+    plan: free
+    env: docker
+    region: oregon
+    healthCheckPath: /api/products
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: FRONTEND_URL
-        sync: false
+        value: https://YOUR_FRONTEND_URL_HERE.vercel.app
+      - key: PORT
+        value: 8080
